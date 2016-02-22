@@ -132,7 +132,7 @@ var game = {
     console.log('stage area: ');
     console.log(self.stage);
      //compares the cards put into the stage and returns highest card
-  return self.stage.sort(function(cardA, cardB) {
+  self.stage.sort(function(cardA, cardB) {
             return cardA.worth - cardB.worth;
           });
   //show stage sorted:
@@ -140,27 +140,24 @@ var game = {
   console.log(self.stage);
   //round winner
   console.log('round winner: ');
-  console.log(self.stage[1]);
+  console.log(self.stage[1].cardMark);
      //the player w/ highest card gets its beginning card and the other players' beginng card pushed //to the end of his deck
  },
  proDecks: function() {
    var self = this;
-   var stageFix = self.stage;
-   console.log('new stage: ' + stageFix);
+
+   console.log('new stage: ')
+   console.log(self.stage);
    //depending on the cardMark in the higher ranked card, choose player to add card to
    //get stage[1]'s cardMark
-   var roundWinner = stageFix[1].cardMark;
+   var roundWinner = self.stage[1].cardMark;
    console.log('round winner is: ' + roundWinner);
    //use cardMark to put both cards into the deck of the player with that cardMark
    self.players.forEach(function(val) {
-     if(val.playerName.includes(roundWinner)) {
+     if(val.playerName.match(roundWinner)) {
        self.stage.forEach(function(a) {
          val.playerDeck.push(self.stage.pop());
        });
-       console.log('stage area: ');
-       console.log(self.stage);
-       console.log(val.playerName + "'s deck:" );
-       console.log(val.playerDeck);
      }
    })
 
