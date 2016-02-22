@@ -1,0 +1,24 @@
+Requirements: https://github.com/ga-wdi-exercises/project1
+
+Bronze, Silver, Gold Plans
+  Bronze
+  -html and css that has a title header, divs to hold players's names, divs to hold drawn card, and divs for their decks.
+  another section that shows the users who wins each round, if there is a tie, who wins the game
+  Silver
+  -css to make it look like a game
+  Gold
+  -code handles ties in the traditional way, css3 transitions, etc
+
+  User Stories
+  -Users should be able to play intuitively in order to mimic the simplicity of the IRL game
+  -So the game can start right away, onload, there should be spaces and a split deck for two players
+  -users should be able to see who's winning the game and be shown who the eventual winner is so they can keep track of how the game is going
+  -users should not be able to see what cards they are holding, so there is no cheating
+
+  Componenets
+  data, presentation, styles, DOM manipulation
+  -psuedocode for data inside project1.js
+  -finish data portion then build presentation and styles, then add DOM manipulation to project1.js
+  presentation
+  styles
+  DOM 
