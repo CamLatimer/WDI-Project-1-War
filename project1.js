@@ -144,30 +144,51 @@ var game = {
      //the player w/ highest card gets its beginning card and the other players' beginng card pushed //to the end of his deck
  },
  proDecks: function() {
+   var tempStage = this.stage;
    var self = this;
-
-   console.log('new stage: ')
-   console.log(self.stage);
    //depending on the cardMark in the higher ranked card, choose player to add card to
    //get stage[1]'s cardMark
-   var roundWinner = self.stage[1].cardMark;
-   console.log('round winner is: ' + roundWinner);
+   var roundWinner = tempStage[1].cardMark;
+   console.log(tempStage);
    //use cardMark to put both cards into the deck of the player with that cardMark
    self.players.forEach(function(val) {
-     if(val.playerName.match(roundWinner)) {
-       self.stage.forEach(function(a) {
-         val.playerDeck.push(self.stage.pop());
-       });
-     }
-   })
-
+     if(val.playerName == roundWinner){
+       for(var i = 0; i < tempStage.length; i++){
+        val.playerDeck.push(tempStage[i]);
+        }
+       }
+     })
+     self.stage = [];
+     console.log('stage status:');
+     console.log(self.stage);
+     tempStage = [];
+     console.log('temp stage status:');
+     console.log(tempStage);
+     console.log('player status:');
+     console.log(self.players);
+ },
+ playAgain: function() {
+   //keep game going while no players have 52 cards
+    //check to see if anyone has 52 cards
+  var playGame = true;
+  self.players.forEach(function(val) {
+    if(val.playerDeck.length < 52) {
+      playGame = true;
+    } else {
+      return playGame = false;
+    }
+  })
  },
  play: function() {
-   this.buildDeck();
-   this.shuffleDeck();
-   this.buildPlayers();
-   this.deal();
-   this.fight();
-   this.proDecks();
+   while(playGame === true) {
+     this.buildDeck();
+     this.shuffleDeck();
+     this.buildPlayers();
+     this.deal();
+     this.fight();
+     this.proDecks();
+   }
+
+   //if one player has 0 cards, end game
  }
 }
