@@ -1,0 +1,62 @@
+body {
+width: 100%;
+margin: 0;
+}
+/*holds game area*/
+.game-container {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  flex-basis: auto;
+}
+/*holds a side for each player*/
+.player-col {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border: 2px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: flex-end;
+}
+.stage-container{
+  display: flex;
+  height: auto;
+  width: 100%;
+  margin: auto;
+  flex-direction: column;
+  align-content: center;
+  align-items: flex-end;
+}
+.card-container {
+  display: flex;
+  width: 200px;
+  height: auto;
+  margin: auto;
+}
+h3{
+  text-align: center;
+  width: 100%;
+  height: auto;
+  margin: auto;
+}
+.player-deck-holder {
+
+}
+.profile-holder {
+  display: flex;
+  height: auto;
+  width: 100%;
+  margin: auto;
+  flex-direction: column;
+  align-content: center;
+  align-items: flex-end;
+}
+h4 {
+  text-align: center;
+  width: 100%;
+  height: auto;
+  margin: auto;
+}
