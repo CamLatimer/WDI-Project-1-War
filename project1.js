@@ -1,5 +1,6 @@
 console.log('scripts up...')
 /*
+psuedo:
 game object that contains
 a deck
   deck is an array of card objects
@@ -29,7 +30,7 @@ function to play()
 var values  = [2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K", "A"];
 var suits   = ["Clubs", "Diamonds", "Hearts", "Spades"];
 //some players to add to game automatically for testing
-var playersToAdd = ['cam', 'leah'];
+var playersToAdd = ['Good Guys', 'Bad Guys'];
 
 //game object
 var game = {
@@ -53,7 +54,6 @@ var game = {
     })
     console.log('og deck: ');
     console.log(self.warDeck)
-    return self.warDeck;
   },
   shuffleDeck: function() {
     var self = this;
@@ -66,7 +66,7 @@ var game = {
         }
      })
    })
-   console.log('shuffled deck: ');
+   console.log('shuffled deck')
    console.log(self.warDeck);
    return self.warDeck;
  },
@@ -77,8 +77,8 @@ var game = {
        playerName: val,
        playerDeck: []
      });
-   })
-   console.log('players: ');
+   });
+   console.log('players');
    console.log(self.players);
  },
  deal: function() {
@@ -111,8 +111,6 @@ var game = {
   });
 
   //playerDecks are full
-  console.log('player decks: ')
-  console.log(playerDeckHolder);
   //og warkDeck is now empty
   console.log('war deck: ')
   console.log(self.warDeck);
@@ -121,7 +119,7 @@ var game = {
   console.log(self.players);
 
  },
- fight: function() {
+ compareCards: function() {
    var self = this;
    //function to pit cards against each other
       //put a card from each player into play area. card comes from the beginning of each players deck
@@ -143,7 +141,7 @@ var game = {
   console.log(self.stage[1].cardMark);
      //the player w/ highest card gets its beginning card and the other players' beginng card pushed //to the end of his deck
  },
- proDecks: function() {
+ awardCards: function() {
    var tempStage = this.stage;
    var self = this;
    //depending on the cardMark in the higher ranked card, choose player to add card to
@@ -167,28 +165,30 @@ var game = {
      console.log('player status:');
      console.log(self.players);
  },
- playAgain: function() {
+ /*playAgain: function() {
+   var self = this;
    //keep game going while no players have 52 cards
     //check to see if anyone has 52 cards
-  var playGame = true;
   self.players.forEach(function(val) {
     if(val.playerDeck.length < 52) {
-      playGame = true;
-    } else {
-      return playGame = false;
+      //if no one has 52 cards yet, start a new round
+      var go = prompt('ready?(y/n)');
+      if(go = 'y'){
+        self.play();
+      }
+    } else if(val.playerDeck.length === 52) {
+      //if a player has 52 cards...
+      return console.log(val.playerName + ' wins!\n' + 'play again? (y/n)');
     }
   })
- },
- play: function() {
-   while(playGame === true) {
+},
+  play: function() {
      this.buildDeck();
      this.shuffleDeck();
      this.buildPlayers();
      this.deal();
-     this.fight();
-     this.proDecks();
-   }
-
-   //if one player has 0 cards, end game
- }
+     this.compareCards();
+     this.awardCards();
+     this.playAgain();
+ }*/
 }
