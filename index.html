@@ -14,7 +14,7 @@
 </section>
 <section class="game-container">
   <div id="round-popup" class="round-winner-display-invisible"><h3><span>X</span></h3><h2>Round Winner:</h2><h1 id="winning-player">YOU</h1></div>
-  <section class="player-col">
+  <section id="computer-col" class="player-col">
     <div class="stage-container">
       <div class="card-container">
         <img id="display-card0" class="cards" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Laptop_font_awesome.svg/200px-Laptop_font_awesome.svg.png" alt="laptop">
@@ -22,13 +22,16 @@
     </div>
     <!--<div class="player-status"><div></div></div> -->
     <div class="player-deck-holder"><img class="display-deck cards" src="img/back-red.png" alt="card-back"></div>
-    <div class="profile-holder"><h4 class="name-display">COMPUTER</h4></div>
+    <div class="profile-holder">
+      <h4 class="name-display">COMPUTER</h4>
+      <h3 id="computer-score"></h3>
+    </div>
   </section>
   <aside>
     <h4 id="vs-display">VS.</h4>
     <h2 class="deal-trig">DEAL</h2>
   </aside>
-  <section class="player-col">
+  <section id="you-col" class="player-col">
     <div class=stage-container>
       <div class="card-container">
         <img id="display-card1" class="cards" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/718smiley.svg/200px-718smiley.svg.png" alt="smiley">
@@ -37,7 +40,11 @@
     </div>
     <!--<div class="player-status"><div></div></div> -->
     <div class="player-deck-holder"><img id="display-card2" class="display-deck cards" src="img/back-red.png" alt="card-back"></div>
-    <div class="profile-holder"><h4 class="name-display">YOU</h4></div>
+    <div class="profile-holder">
+      <h4 class="name-display">YOU</h4>
+      <h3 id="you-score"></h3>
+    </div>
+
   </section>
 </section>
 <footer><h4 class="reset-trig">RESET</h4></footer>

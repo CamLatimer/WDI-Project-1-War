@@ -246,6 +246,7 @@ var game = {
  setUpGame: function() {
    var cardElComputer = document.getElementById('display-card0');
    var cardElYou = document.getElementById('display-card1');
+   var computerScoreDisplay = document.querySelector('#computer-score');
    cardElComputer.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Laptop_font_awesome.svg/200px-Laptop_font_awesome.svg.png";
    cardElComputer.alt = 'laptop';
    cardElYou.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/718smiley.svg/200px-718smiley.svg.png"
@@ -257,6 +258,7 @@ var game = {
    game.shuffleDeck();
    game.buildPlayers();
    game.deal();
+   scoreDisplay.textContent = players[]
 
  }
 }
