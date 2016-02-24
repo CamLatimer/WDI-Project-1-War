@@ -43,7 +43,7 @@ var game = {
       suits.forEach(function(cardSuit) {
         self.warDeck.push(
           {
-          cardName: 'img/Playing_Card_' + cardSuit + '_' + val + '.svg',
+          cardName: 'img/Playing_card_' + cardSuit + '_' + val + '.svg',
           }
         );
       })
@@ -137,6 +137,21 @@ var game = {
   });
     console.log('stage area: ');
     console.log(self.stage);
+    //put in-play cards into document body
+
+      var cardElComputer = document.getElementById('display-card0');
+      var cardElYou = document.getElementById('display-card1');
+      self.stage.forEach(function(card) {
+        if (card.cardMark == 'Computer') {
+          cardElComputer.src = card.cardName;
+        } else if (card.cardMark == 'You') {
+          cardElYou.src = card.cardName;
+        }
+      })
+
+      console.log(self.stage[0].cardName);
+
+
      //compares the cards put into the stage and returns highest card
   self.stage.sort(function(cardA, cardB) {
             return cardA.worth - cardB.worth;
