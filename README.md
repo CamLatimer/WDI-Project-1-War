@@ -17,13 +17,13 @@ the game, then connect the UI HTML elements and CSS styles to the javascript wit
 event listeners.
 
 ###User Stories:
-*-Users should be able to see buttons/links clearly marked in order to play
-intuitively and mimic the simplicity of the IRL game*
-*-So the game can start right away, onload, there should be spaces and a split
-deck for two players already loaded.*
-*-users should be able to see who's winning the game and be shown who the eventual
-winner is so they can keep track of how the game is going*
-*-Users should have a reset button in case they want to restart the game.*
+* Users should be able to see buttons/links clearly marked in order to play
+intuitively and mimic the simplicity of the IRL game
+* So the game can start right away, onload, there should be spaces and a split
+deck for two players already loaded.
+* users should be able to see who's winning the game and be shown who the eventual
+winner is so they can keep track of how the game is going
+* Users should have a reset button in case they want to restart the game.
 
 ###Installation:
 1. Clone, fork or download the .zip folder
