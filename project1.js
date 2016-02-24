@@ -45,7 +45,12 @@ var dealTrig = document.querySelector('.deal-trig');
 dealTrig.addEventListener('click', function() {
   game.compareCards();
 });
-
+//toggle invisibility for display that shows winner of each round
+var displayCloser = document.querySelector('span');
+displayCloser.addEventListener('click', function() {
+  var winnerDisplay = document.querySelector('#round-popup');
+  winnerDisplay.className = 'round-winner-display-invisible';
+});
 
 //game object
 var game = {
@@ -138,7 +143,7 @@ var game = {
   console.log('war deck: ')
   console.log(self.warDeck);
   //check that each player has a deck
-  console.log('players have decks: ')
+  console.log('player status: ')
   console.log(self.players);
 
  },
@@ -178,9 +183,15 @@ var game = {
   console.log(self.stage);
   //round winner
   console.log('round winner: ');
-  console.log(self.stage[1].cardMark);
+  var winMark = self.stage[1].cardMark;
+  console.log(winMark);
+
      //the player w/ highest card gets its beginning card and the other players' beginng card pushed //to the end of his deck
   self.awardCards();
+  var winnerDisplay = document.querySelector('#round-popup');
+  winnerDisplay.className = 'round-winner-display-visible';
+  var winnerName = document.querySelector('#winning-player');
+  winnerName.textContent = winMark;
  },
  awardCards: function() {
    var tempStage = this.stage;
