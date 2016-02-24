@@ -1,3 +1,4 @@
+
 body {
 width: 100%;
 margin: 0;
@@ -71,7 +72,7 @@ h3{
 .profile-holder {
   display: flex;
   height: auto;
-  width: 100%;
+  width: 55%;
   margin: auto;
   flex-direction: column;
   align-content: center;
@@ -138,24 +139,7 @@ footer {
   background: white;
   z-index: 200;
   opacity: 1;
-}
-.round-winner-display-invisible {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  align-items:stretch;
-  top: 250px;
-  left: 450px;
-  margin: 0;
-  padding: 0;
-  width: 300px;
-  height: 200px;
-  border: .5px solid black;
-  background: white;
-  z-index: 200;
-  z-index: -200;
-  opacity: 0;
+  transition: opacity .7s;
 }
 .round-winner-display-visible h3{
   position: relative;
@@ -177,6 +161,24 @@ footer {
   left: -10px;
   margin: 0 auto;
 }
+.round-winner-display-invisible {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items:stretch;
+  top: 250px;
+  left: 450px;
+  margin: 0;
+  padding: 0;
+  width: 300px;
+  height: 200px;
+  background: white;
+  z-index: 200;
+  z-index: -200;
+  opacity: 0;
+  transition: opacity .1s;
+}
 .round-winner-display-invisible h3{
   position: relative;
   text-align: right;
@@ -185,15 +187,39 @@ footer {
   font-size: 2em;
   cursor: pointer;
   margin: 0;
-}s
+  opacity: 0;
+  transition: opacity .1s;
+}
 .round-winner-display-invisible h2 {
   text-align: center;
   padding: 0;
   margin: 15px auto 0 auto;
   font-size: 2em;
+  opacity: 0;
+  transition: opacity .1s;
 }
 .round-winner-display-invisible h1 {
   padding; 0;
   left: -10px;
   margin: 0 auto;
+  opacity: 0;
+  transition: opacity .1s;
+}
+.score-display {
+  display: flex;
+  flex-direction: row;
+  align-content: flex-start;
+  align-items: flex-end;
+}
+.score-meter {
+  border: 1px solid blue;
+  width: 5px;
+  height: 2px;
+  background: red;
+  float: left;
+}
+#computer-score, #you-score {
+  width: 100%;
+  margin-top: 20px;
+  text-align: left;
 }

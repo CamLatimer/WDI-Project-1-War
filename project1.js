@@ -34,6 +34,8 @@ var values  = [2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K", "A"];
 var suits   = ["club", "diamond", "heart", "spade"];
 //some players to add to game automatically for testing
 var playersToAdd = ['Computer', 'You'];
+var computerScoreDisplay = document.querySelector('#computer-score');
+var youScoreDisplay = document.querySelector('#you-score');
 
 //event listeners / handlers
 //set/reset game on click
@@ -186,12 +188,15 @@ var game = {
   var winMark = self.stage[1].cardMark;
   console.log(winMark);
 
-     //the player w/ highest card gets its beginning card and the other players' beginng card pushed //to the end of his deck
+     //the player w/ highest card gets its beginning card and the other players' beginng card pushedto the end of his deck
+     //then the winner of that round is shown to the user
   self.awardCards();
   var winnerDisplay = document.querySelector('#round-popup');
   winnerDisplay.className = 'round-winner-display-visible';
   var winnerName = document.querySelector('#winning-player');
   winnerName.textContent = winMark;
+    //update the score displayed to user
+
  },
  awardCards: function() {
    var tempStage = this.stage;
@@ -216,6 +221,22 @@ var game = {
      console.log(tempStage);
      console.log('player status:');
      console.log(self.players);
+     //display size of deck / score to user
+     self.players.forEach(function(player) {
+       if(player.playerDeck.length < 52) {
+         if (player.playerName == 'Computer') {
+             var scoreUnit = document.createElement('div');
+             scoreUnit.className = 'score-meter';
+             computerScoreDisplay.appendChild(scoreUnit);
+           console.log(player.playerDeck.length);
+         } else if (player.playerName == 'You') {
+           youScoreDisplay.textContent = player.playerDeck.length;
+           console.log(player.playerDeck.length);
+         }
+       } else {
+         console.log(player.playerName + ' wins!');
+       }
+     })
  },
  /*playAgain: function() {
    var self = this;
@@ -247,6 +268,7 @@ var game = {
    var cardElComputer = document.getElementById('display-card0');
    var cardElYou = document.getElementById('display-card1');
    var computerScoreDisplay = document.querySelector('#computer-score');
+   var youScoreDisplay = document.querySelector('#you-score');
    cardElComputer.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Laptop_font_awesome.svg/200px-Laptop_font_awesome.svg.png";
    cardElComputer.alt = 'laptop';
    cardElYou.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/718smiley.svg/200px-718smiley.svg.png"
@@ -258,7 +280,10 @@ var game = {
    game.shuffleDeck();
    game.buildPlayers();
    game.deal();
-   scoreDisplay.textContent = players[]
-
+   //computerScoreDisplay.textContent = 26;
+   //ouScoreDisplay.textContent = 26;
+   var scoreUnit = document.createElement('div');
+   scoreUnit.className = 'score-meter';
+   computerScoreDisplay.appendChild(scoreUnit);
  }
 }
