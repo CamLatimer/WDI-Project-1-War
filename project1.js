@@ -206,10 +206,20 @@ var game = {
    var roundWinner = tempStage[1].cardMark;
    console.log(tempStage);
    //use cardMark to put both cards into the deck of the player with that cardMark
+   //show score in display
+   if(roundWinner == 'Computer') {
+     var compScoreUnit = document.createElement('div');
+     compScoreUnit.className = 'score-meter'
+     computerScoreDisplay.appendChild(compScoreUnit);
+   } else if (roundWinner == 'You') {
+     var youScoreUnit = document.createElement('div');
+     youScoreUnit.className = 'score-meter';
+     youScoreDisplay.appendChild(youScoreUnit);
+   }
    self.players.forEach(function(val) {
      if(val.playerName == roundWinner){
        for(var i = 0; i < tempStage.length; i++){
-        val.playerDeck.push(tempStage[i]);
+          val.playerDeck.push(tempStage[i]);
         }
        }
      })
@@ -225,12 +235,8 @@ var game = {
      self.players.forEach(function(player) {
        if(player.playerDeck.length < 52) {
          if (player.playerName == 'Computer') {
-             var scoreUnit = document.createElement('div');
-             scoreUnit.className = 'score-meter';
-             computerScoreDisplay.appendChild(scoreUnit);
            console.log(player.playerDeck.length);
          } else if (player.playerName == 'You') {
-           youScoreDisplay.textContent = player.playerDeck.length;
            console.log(player.playerDeck.length);
          }
        } else {
@@ -282,8 +288,11 @@ var game = {
    game.deal();
    //computerScoreDisplay.textContent = 26;
    //ouScoreDisplay.textContent = 26;
-   var scoreUnit = document.createElement('div');
-   scoreUnit.className = 'score-meter';
-   computerScoreDisplay.appendChild(scoreUnit);
+   var compScoreUnit = document.createElement('div');
+   var youScoreUnit = document.createElement('div');
+   compScoreUnit.className = 'score-meter'
+   youScoreUnit.className = 'score-meter';
+   computerScoreDisplay.appendChild(compScoreUnit);
+   youScoreDisplay.appendChild(youScoreUnit);
  }
 }
