@@ -1,4 +1,7 @@
 console.log('scripts up...')
+window.addEventListener('load', function() {
+  game.setUpGame();
+});
 /*
 psuedo:
 game object that contains
@@ -31,6 +34,18 @@ var values  = [2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K", "A"];
 var suits   = ["club", "diamond", "heart", "spade"];
 //some players to add to game automatically for testing
 var playersToAdd = ['Computer', 'You'];
+
+//event listeners / handlers
+//set/reset game on click
+var setUpTrig = document.querySelector('.reset-trig');
+setUpTrig.addEventListener('click', function() {
+  game.setUpGame();
+});
+var dealTrig = document.querySelector('.deal-trig');
+dealTrig.addEventListener('click', function() {
+  game.compareCards();
+});
+
 
 //game object
 var game = {
@@ -144,8 +159,10 @@ var game = {
       self.stage.forEach(function(card) {
         if (card.cardMark == 'Computer') {
           cardElComputer.src = card.cardName;
+          cardElComputer.alt = card.carName;
         } else if (card.cardMark == 'You') {
           cardElYou.src = card.cardName;
+          cardElYou.alt = card.cardName;
         }
       })
 
@@ -163,6 +180,7 @@ var game = {
   console.log('round winner: ');
   console.log(self.stage[1].cardMark);
      //the player w/ highest card gets its beginning card and the other players' beginng card pushed //to the end of his deck
+  self.awardCards();
  },
  awardCards: function() {
    var tempStage = this.stage;
@@ -213,5 +231,21 @@ var game = {
      //game.compareCards();
      //game.awardCards();
      //game.playAgain();
+ },
+ setUpGame: function() {
+   var cardElComputer = document.getElementById('display-card0');
+   var cardElYou = document.getElementById('display-card1');
+   cardElComputer.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Laptop_font_awesome.svg/200px-Laptop_font_awesome.svg.png";
+   cardElComputer.alt = 'laptop';
+   cardElYou.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/718smiley.svg/200px-718smiley.svg.png"
+   cardElYou.alt = "smiley"
+   game.warDeck = [],
+   game.players = [],
+   game.stage = [],
+   game.buildDeck();
+   game.shuffleDeck();
+   game.buildPlayers();
+   game.deal();
+
  }
 }

@@ -46,7 +46,7 @@ h1 {
 .card-container {
   display: flex;
   width: 200px;
-  height: auto;
+  height: 200px;
   margin: auto;
   margin-top: 30px;
   margin-bottom: 30px;
@@ -84,7 +84,6 @@ h4 {
   margin: auto;
 }
 .cards {
-  cursor: pointer;
 }
 .display-deck {
   width: 175px;
@@ -93,22 +92,30 @@ h4 {
 }
 aside {
   display: flex;
+  flex-direction: column;
   position: fixed;
   top: 300px;
   margin: auto;
   padding: 0;
+
 }
-#vs-display{
+#vs-display {
   font-style: italic;
   position: relative;
   left: -14px;
 }
+.deal-trig {
+  margin-top: 20px;
+  position: relative;
+  left: -14px;
+  cursor: pointer;
+}
 footer {
-  margin: 40px 20px 0 30px;
+  margin: 0 20px 0 30px;
 }
 .reset-trig {
   position: relative;
-  text-align: left;
+  text-align: right;
   cursor: pointer;
 }
 .off-screen {
