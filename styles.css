@@ -111,3 +111,7 @@ footer {
   text-align: left;
   cursor: pointer;
 }
+.off-screen {
+  position: fixed;
+  top: -50px;
+}

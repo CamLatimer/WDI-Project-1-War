@@ -28,9 +28,9 @@ function to play()
 
 //build deck
 var values  = [2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K", "A"];
-var suits   = ["Clubs", "Diamonds", "Hearts", "Spades"];
+var suits   = ["club", "diamond", "heart", "spade"];
 //some players to add to game automatically for testing
-var playersToAdd = ['Good Guys', 'Bad Guys'];
+var playersToAdd = ['Computer', 'You'];
 
 //game object
 var game = {
@@ -40,17 +40,17 @@ var game = {
   buildDeck: function() {
     var self = this;
     values.forEach(function(val) {
-      suits.forEach(function(suit) {
+      suits.forEach(function(cardSuit) {
         self.warDeck.push(
           {
-          value: val,
-          suit: suit
+          cardName: 'img/Playing_Card_' + cardSuit + '_' + val + '.svg',
           }
         );
       })
     })
     self.warDeck.forEach(function(val){
       val.worth = self.warDeck.indexOf(val);
+
     })
     console.log('og deck: ');
     console.log(self.warDeck)
@@ -68,7 +68,6 @@ var game = {
    })
    console.log('shuffled deck')
    console.log(self.warDeck);
-   return self.warDeck;
  },
  buildPlayers: function() {
    var self = this;
@@ -109,6 +108,15 @@ var game = {
       index.cardMark = val.playerName;
     })
   });
+  //make card img elements for each playerDecks and put them on page
+  /*self.players.forEach(function(val) {
+    val.playerDeck.forEach(function(card) {
+      var cardEl = document.createElement('img');
+      cardEl.src = card.cardName;
+      var mover = document.getElementById('mover-deck' + card);
+      mover.appendChild(cardEl);
+    })
+  })*/
 
   //playerDecks are full
   //og warkDeck is now empty
@@ -182,13 +190,13 @@ var game = {
     }
   })
 },
-  play: function() {
-     this.buildDeck();
-     this.shuffleDeck();
-     this.buildPlayers();
-     this.deal();
-     this.compareCards();
-     this.awardCards();
-     this.playAgain();
- }*/
+  */play: function() {
+     game.buildDeck();
+     game.shuffleDeck();
+     game.buildPlayers();
+     game.deal();
+     //game.compareCards();
+     //game.awardCards();
+     //game.playAgain();
+ }
 }
