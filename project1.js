@@ -1,44 +1,17 @@
 console.log('scripts up...')
+//get the environment ready
 window.addEventListener('load', function() {
   game.setUpGame();
 });
-/*
-psuedo:
-game object that contains
-a deck
-  deck is an array of card objects
-  card object properties
-    cardName
-    cardWorth
-function to shuffle the deck
-function to build players
-  each player is an object
-  player object properties
-    playerName
-    playerDeck
-      array of cards made from game.deck
-function to deal cards to players
-  divides deck into arrays for each player
-  assigns each new deck to a player's player.playerDeck property
-function to playCard
-  compares the cards at the beginning of each players' deck
-  the player w/ highest card gets its beginning card and the other players' beginng card pushed to the end of his deck
-function to start or end game
-function to play()
-  while both players have more than 0 cards
-  if one player has 0 cards, end game
-*/
 //build deck
 var values  = [2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K", "A"];
 var suits   = ["club", "diamond", "heart", "spade"];
-//some players to add to game automatically for testing
-var playersToAdd = ['Computer', 'You'];
+var playersToAdd = ['Computer', 'You']; //anticipated features for adding more players. may come later
 var computerScoreDisplay = document.querySelector('#computer-score');
 var youScoreDisplay = document.querySelector('#you-score');
 
 //event listeners / handlers
-//set/reset game on click
-var setUpTrig = document.querySelector('.reset-trig');
+var setUpTrig = document.querySelector('.reset-trig');//set/reset game on click
 setUpTrig.addEventListener('click', function() {
   game.setUpGame();
 });
@@ -46,8 +19,7 @@ var dealTrig = document.querySelector('.deal-trig');
 dealTrig.addEventListener('click', function() {
   game.compareCards();
 });
-//toggle invisibility for display that shows winner of each round
-var displayCloser = document.querySelector('span');
+var displayCloser = document.querySelector('span');//toggle invisibility for display that shows winner of each round
 displayCloser.addEventListener('click', function() {
   var winnerDisplay = document.querySelector('#round-popup');
   winnerDisplay.className = 'round-winner-display-invisible';
@@ -104,7 +76,7 @@ var game = {
  deal: function() {
    var self = this;
   //give a deck to each player
-    //divides deck into arrays for each player
+  //divides deck into arrays for each player and distributes cards across decks
   var numDecks = self.players.length;
   var numCards = self.warDeck.length;
   var cardsPerDeck = numCards / numDecks;
@@ -113,34 +85,24 @@ var game = {
   for(var a = 0; a < numDecks; a++) {
     playerDeckHolder[a] = [];
   }
-  //puts cards from warDeck into each deck
+  //puts cards from warDeck into each player's deck
   playerDeckHolder.forEach(function(val) {
     for(var b = 0; b < cardsPerDeck; b++) {
       val.push(self.warDeck.pop());
     }
   })
-  //give each player a deck
+  //puts a deck into each player object
   for(var c = 0; c < self.players.length; c++) {
     self.players[c].playerDeck = playerDeckHolder[c];
   }
-  //mark each card according to what player it's held in so you can keep track of who wins each round
+  //marks each card according to what player it's held in so you can keep track of who wins each round
   self.players.forEach(function(val) {
     val.playerDeck.forEach(function(index) {
       index.cardMark = val.playerName;
     })
   });
-  //make card img elements for each playerDecks and put them on page
-  /*self.players.forEach(function(val) {
-    val.playerDeck.forEach(function(card) {
-      var cardEl = document.createElement('img');
-      cardEl.src = card.cardName;
-      var mover = document.getElementById('mover-deck' + card);
-      mover.appendChild(cardEl);
-    })
-  })*/
-
-  //playerDecks are full
-  //og warkDeck is now empty
+  //show playerDecks are full
+  //show og warkDeck is now empty
   console.log('war deck: ')
   console.log(self.warDeck);
   //check that each player has a deck
@@ -150,12 +112,13 @@ var game = {
  },
  compareCards: function() {
    var self = this;
-   //function to stage cards against each other
-      //put a card from each player into play area. card comes from the beginning of each players deck
+   //function to stage cards against each other in each round
+      //put a card from each player into stage area. card comes from the beginning of each players deck
   self.players.forEach(function(val) {
     //puts one card from front of each players deck
     self.stage.push(val.playerDeck.shift());
   });
+  //show stage area contents
     console.log('stage area: ');
     console.log(self.stage);
     //put staged cards into document body
@@ -196,25 +159,9 @@ var game = {
    var tempStage = this.stage;
    var self = this;
    //depending on the cardMark in the higher ranked card, choose player to add card to
-   //get stage[1]'s cardMark
-   var roundWinner = tempStage[1].cardMark;
+   var roundWinner = tempStage[1].cardMark; //gets winners cardMark
    console.log(tempStage);
-   //use cardMark to put both cards into the deck of the player with that cardMark
-   //show score in display with a display meter made from divs
-   if(roundWinner == 'Computer') {
-       for(var i = 0; i < 2; i++) {
-         var compScoreUnit = document.createElement('div');
-         compScoreUnit.className = 'score-meter'
-         computerScoreDisplay.appendChild(compScoreUnit);
-      }
-      var youScore = youScoreDisplay.childNodes.length;
-      youScoreDisplay.removeChild(youScoreDisplay.childNodes[youScore - 1]);
-   } else if (roundWinner == 'You') {
-     var youScoreUnit = document.createElement('div');
-     youScoreUnit.className = 'score-meter';
-     youScoreDisplay.appendChild(youScoreUnit);
-   }
-
+   //use cardMark to put both cards into the deck of the round winner
    self.players.forEach(function(val) {
      if(val.playerName == roundWinner){
        for(var i = 0; i < tempStage.length; i++){
@@ -222,6 +169,21 @@ var game = {
         }
        }
      })
+   //show score in display with a display meter made from divs on game init
+   if(roundWinner == 'Computer') {
+     var compScoreUnit = document.createElement('div');
+     compScoreUnit.className = 'score-meter'
+     computerScoreDisplay.appendChild(compScoreUnit);
+      var youScoreMeter = youScoreDisplay.childNodes.length;
+      youScoreDisplay.removeChild(youScoreDisplay.childNodes[youScoreMeter - 1]);
+   } else if (roundWinner == 'You') {
+     var youScoreUnit = document.createElement('div');
+     youScoreUnit.className = 'score-meter';
+     youScoreDisplay.appendChild(youScoreUnit);
+     var computerScoreMeter = computerScoreDisplay.childNodes.length;
+     computerScoreDisplay.removeChild(computerScoreDisplay.childNodes[computerScoreMeter -1]);
+   }
+    //clear stage for next round
      self.stage = [];
      console.log('stage status:');
      console.log(self.stage);
@@ -241,28 +203,12 @@ var game = {
            console.log(player.playerDeck.length);
          }
        } else {
+         alert(player.playerName + ' wins!');
          console.log(player.playerName + ' wins!');
        }
      })
  },
- /*playAgain: function() {
-   var self = this;
-   //keep game going while no players have 52 cards
-    //check to see if anyone has 52 cards
-  self.players.forEach(function(val) {
-    if(val.playerDeck.length < 52) {
-      //if no one has 52 cards yet, start a new round
-      var go = prompt('ready?(y/n)');
-      if(go = 'y'){
-        self.play();
-      }
-    } else if(val.playerDeck.length === 52) {
-      //if a player has 52 cards...
-      return console.log(val.playerName + ' wins!\n' + 'play again? (y/n)');
-    }
-  })
-},
-  */play: function() {
+  play: function() {
      game.buildDeck();
      game.shuffleDeck();
      game.buildPlayers();
@@ -287,9 +233,7 @@ var game = {
    game.shuffleDeck();
    game.buildPlayers();
    game.deal();
-   //computerScoreDisplay.textContent = 26;
-   //ouScoreDisplay.textContent = 26;
-   //build out displays for scorekeeping
+   //initialize display meters for scorekeeping
      game.players[0].playerDeck.forEach(function(card) {
        var compScoreUnit = document.createElement('div');
        compScoreUnit.className = 'score-meter';
@@ -302,3 +246,29 @@ var game = {
      })
  }
 }
+/*
+psuedo:
+game object that contains
+a deck
+  deck is an array of card objects
+  card object properties
+    cardName
+    cardWorth
+function to shuffle the deck
+function to build players
+  each player is an object
+  player object properties
+    playerName
+    playerDeck
+      array of cards made from game.deck
+function to deal cards to players
+  divides deck into arrays for each player
+  assigns each new deck to a player's player.playerDeck property
+function to playCard
+  compares the cards at the beginning of each players' deck
+  the player w/ highest card gets its beginning card and the other players' beginng card pushed to the end of his deck
+function to start or end game
+function to play()
+  while both players have more than 0 cards
+  if one player has 0 cards, end game
+*/

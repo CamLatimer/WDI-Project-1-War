@@ -72,7 +72,7 @@ h3{
 .profile-holder {
   display: flex;
   height: auto;
-  width: 85%;
+  width: 55%;
   margin: auto;
   flex-direction: column;
   align-content: center;
@@ -210,9 +210,9 @@ footer {
   align-items: flex-end;
 }
 .score-meter {
-  border: .3px solid blue;
+margin: 0 2px 0 0;
   width: 2px;
-  height: 5px;
+  height: 10px;
   background: red;
   float: left;
 }
