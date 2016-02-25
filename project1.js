@@ -153,7 +153,6 @@ var game = {
   var winnerName = document.querySelector('#winning-player');
   winnerName.textContent = winMark;
     //update the score displayed to user
-
  },
  awardCards: function() {
    var tempStage = this.stage;

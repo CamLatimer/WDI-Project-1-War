@@ -1,8 +1,10 @@
 
 body {
 width: 100%;
-margin: 0;
 font-family: 'Carrois Gothic', sans-serif;
+background: #66cd9b;
+color: white;
+padding: 0;
 }
 header {
   width: 100%;
@@ -22,7 +24,7 @@ h1 {
   flex-grow: 1;
   flex-basis: auto;
   width: 65%;
-  margin: auto;
+  margin: 0 auto;
 }
 /*holds a side for each player*/
 .player-col {
@@ -103,12 +105,12 @@ aside {
 #vs-display {
   font-style: italic;
   position: relative;
-  left: -14px;
+  left: -40px;
 }
 .deal-trig {
   margin-top: 20px;
   position: relative;
-  left: -14px;
+  left: -40px;
   cursor: pointer;
 }
 footer {
@@ -140,6 +142,7 @@ footer {
   z-index: 200;
   opacity: 1;
   transition: opacity .7s;
+  color: #66cd9b;
 }
 .round-winner-display-visible h3{
   position: relative;
