@@ -28,7 +28,6 @@ function to play()
   while both players have more than 0 cards
   if one player has 0 cards, end game
 */
-
 //build deck
 var values  = [2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K", "A"];
 var suits   = ["club", "diamond", "heart", "spade"];
@@ -151,7 +150,7 @@ var game = {
  },
  compareCards: function() {
    var self = this;
-   //function to pit cards against each other
+   //function to stage cards against each other
       //put a card from each player into play area. card comes from the beginning of each players deck
   self.players.forEach(function(val) {
     //puts one card from front of each players deck
@@ -159,8 +158,7 @@ var game = {
   });
     console.log('stage area: ');
     console.log(self.stage);
-    //put in-play cards into document body
-
+    //put staged cards into document body
       var cardElComputer = document.getElementById('display-card0');
       var cardElYou = document.getElementById('display-card1');
       self.stage.forEach(function(card) {
@@ -172,18 +170,14 @@ var game = {
           cardElYou.alt = card.cardName;
         }
       })
-
-      console.log(self.stage[0].cardName);
-
-
-     //compares the cards put into the stage and returns highest card
+     //compares the cards put into the stage area, puts highest card later in the array
   self.stage.sort(function(cardA, cardB) {
             return cardA.worth - cardB.worth;
           });
-  //show stage sorted:
+  //show stage sorted. highest card is last element:
   console.log('stage sorted: ');
   console.log(self.stage);
-  //round winner
+  //shows round winner which is the last element(highest rank / worth in order):
   console.log('round winner: ');
   var winMark = self.stage[1].cardMark;
   console.log(winMark);
@@ -208,9 +202,11 @@ var game = {
    //use cardMark to put both cards into the deck of the player with that cardMark
    //show score in display
    if(roundWinner == 'Computer') {
-     var compScoreUnit = document.createElement('div');
-     compScoreUnit.className = 'score-meter'
-     computerScoreDisplay.appendChild(compScoreUnit);
+     for(var i = 0; i < 2; i++) {
+       var compScoreUnit = document.createElement('div');
+       compScoreUnit.className = 'score-meter'
+       computerScoreDisplay.appendChild(compScoreUnit);
+    }
    } else if (roundWinner == 'You') {
      var youScoreUnit = document.createElement('div');
      youScoreUnit.className = 'score-meter';
@@ -235,8 +231,10 @@ var game = {
      self.players.forEach(function(player) {
        if(player.playerDeck.length < 52) {
          if (player.playerName == 'Computer') {
+           console.log('cards in the deck for computer:')
            console.log(player.playerDeck.length);
          } else if (player.playerName == 'You') {
+           console.log('cards in the deck for you:')
            console.log(player.playerDeck.length);
          }
        } else {
@@ -288,11 +286,16 @@ var game = {
    game.deal();
    //computerScoreDisplay.textContent = 26;
    //ouScoreDisplay.textContent = 26;
-   var compScoreUnit = document.createElement('div');
-   var youScoreUnit = document.createElement('div');
-   compScoreUnit.className = 'score-meter'
-   youScoreUnit.className = 'score-meter';
-   computerScoreDisplay.appendChild(compScoreUnit);
-   youScoreDisplay.appendChild(youScoreUnit);
+   //build out displays for scorekeeping
+     game.players[0].playerDeck.forEach(function(card) {
+       var compScoreUnit = document.createElement('div');
+       compScoreUnit.className = 'score-meter';
+       computerScoreDisplay.appendChild(compScoreUnit);
+     })
+     game.players[1].playerDeck.forEach(function(card) {
+       var youScoreUnit = document.createElement('div');
+       youScoreUnit.className = 'score-meter';
+       youScoreDisplay.appendChild(youScoreUnit);
+     })
  }
 }
