@@ -182,7 +182,7 @@ var game = {
   var winMark = self.stage[1].cardMark;
   console.log(winMark);
 
-     //the player w/ highest card gets its beginning card and the other players' beginng card pushedto the end of his deck
+     //the player w/ highest card gets both staged cards pushed to the end of his deck
      //then the winner of that round is shown to the user
   self.awardCards();
   var winnerDisplay = document.querySelector('#round-popup');
@@ -200,18 +200,21 @@ var game = {
    var roundWinner = tempStage[1].cardMark;
    console.log(tempStage);
    //use cardMark to put both cards into the deck of the player with that cardMark
-   //show score in display
+   //show score in display with a display meter made from divs
    if(roundWinner == 'Computer') {
-     for(var i = 0; i < 2; i++) {
-       var compScoreUnit = document.createElement('div');
-       compScoreUnit.className = 'score-meter'
-       computerScoreDisplay.appendChild(compScoreUnit);
-    }
+       for(var i = 0; i < 2; i++) {
+         var compScoreUnit = document.createElement('div');
+         compScoreUnit.className = 'score-meter'
+         computerScoreDisplay.appendChild(compScoreUnit);
+      }
+      var youScore = youScoreDisplay.childNodes.length;
+      youScoreDisplay.removeChild(youScoreDisplay.childNodes[youScore - 1]);
    } else if (roundWinner == 'You') {
      var youScoreUnit = document.createElement('div');
      youScoreUnit.className = 'score-meter';
      youScoreDisplay.appendChild(youScoreUnit);
    }
+
    self.players.forEach(function(val) {
      if(val.playerName == roundWinner){
        for(var i = 0; i < tempStage.length; i++){
