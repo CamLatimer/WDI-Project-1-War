@@ -1,5 +1,8 @@
+// AWESOME JOB WITH YOUR COMMENTS :)
 console.log('scripts up...')
 //get the environment ready
+
+// since you put your script tag at the bottom this isn't necessary:
 window.addEventListener('load', function() {
   game.setUpGame();
 });
@@ -11,6 +14,8 @@ var computerScoreDisplay = document.querySelector('#computer-score');
 var youScoreDisplay = document.querySelector('#you-score');
 
 //event listeners / handlers
+
+// NICE job with event listeners and functions!
 var setUpTrig = document.querySelector('.reset-trig');//set/reset game on click
 setUpTrig.addEventListener('click', function() {
   game.setUpGame();
@@ -26,6 +31,7 @@ displayCloser.addEventListener('click', function() {
 });
 
 //game object
+// LOVE that you are using OOP here :) 
 var game = {
   warDeck: [],
   players: [],
@@ -34,6 +40,12 @@ var game = {
     var self = this;
     values.forEach(function(val) {
       suits.forEach(function(cardSuit) {
+        // just for readability I might instead put this string below into a variable
+
+        // For Example:
+        // var cardInfo = 'img/Playing_card_' + cardSuit + '_' + val + '.svg';
+        // self.warDeck.push({cardName: cardInfo})
+
         self.warDeck.push(
           {
           cardName: 'img/Playing_card_' + cardSuit + '_' + val + '.svg',
@@ -45,6 +57,7 @@ var game = {
       val.worth = self.warDeck.indexOf(val);
 
     })
+    // it's definitely good to console.log things while your debugging/coding but just make sure to take the out after for readability and keep code clean
     console.log('og deck: ');
     console.log(self.warDeck)
   },
@@ -63,6 +76,7 @@ var game = {
    console.log(self.warDeck);
  },
  buildPlayers: function() {
+  //  I really like your use of forEach and using objects!
    var self = this;
    playersToAdd.forEach(function(val) {
      self.players.push({
@@ -111,6 +125,9 @@ var game = {
 
  },
  compareCards: function() {
+  //  This compareCards method is really long and here is a place to refactor
+  // I think you could take some of your code here and put it into a separate method
+
    var self = this;
    //function to stage cards against each other in each round
       //put a card from each player into stage area. card comes from the beginning of each players deck
@@ -122,6 +139,21 @@ var game = {
     console.log('stage area: ');
     console.log(self.stage);
     //put staged cards into document body
+
+    // FOR example: below, maybe instead create a method:
+      // stageCards = function(self){
+      //   var cardElComputer = document.getElementById('display-card0');
+      //   var cardElYou = document.getElementById('display-card1');
+      //   self.stage.forEach(function(card) {
+      //     if (card.cardMark == 'Computer') {
+      //       cardElComputer.src = card.cardName;
+      //       cardElComputer.alt = card.carName;
+      //     } else if (card.cardMark == 'You') {
+      //       cardElYou.src = card.cardName;
+      //       cardElYou.alt = card.cardName;
+      //     }
+      //   })
+      // }
       var cardElComputer = document.getElementById('display-card0');
       var cardElYou = document.getElementById('display-card1');
       self.stage.forEach(function(card) {
@@ -171,6 +203,13 @@ var game = {
    //show score in display with a display meter made from divs on game init
    if(roundWinner == 'Computer') {
      var compScoreUnit = document.createElement('div');
+    //  You are using the same code as below in this if/else conditional
+
+    // I think it would be easier to put this again into a separate method
+    // Can you think of a way to combine this?
+        // Lines 210-213 and 215-219 are almost identical, and this is a place to absract a separate method and refactor
+    //
+
      compScoreUnit.className = 'score-meter'
      computerScoreDisplay.appendChild(compScoreUnit);
       var youScoreMeter = youScoreDisplay.childNodes.length;
@@ -183,6 +222,8 @@ var game = {
      computerScoreDisplay.removeChild(computerScoreDisplay.childNodes[computerScoreMeter -1]);
    }
     //clear stage for next round
+
+    // Just watch out again for the console.logs below here. Make sure to clean them up for readability
      self.stage = [];
      console.log('stage status:');
      console.log(self.stage);
@@ -225,6 +266,18 @@ var game = {
    cardElComputer.alt = 'laptop';
    cardElYou.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/718smiley.svg/200px-718smiley.svg.png"
    cardElYou.alt = "smiley"
+
+  //  I think I would another method that you would call for the below arrays:
+
+  // this.resetGame();
+
+  // resetGame = function(){
+  //   game.warDeck = [],
+  //   game.players = [],
+  //   game.stage = []
+  //    ETC...
+  // }
+
    game.warDeck = [],
    game.players = [],
    game.stage = [],
@@ -245,6 +298,7 @@ var game = {
      })
  }
 }
+// I think it's great that your psuedo coding, but I think it should be kept in a separate file
 /*
 psuedo:
 game object that contains
